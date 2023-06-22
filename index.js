@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
-
+// use express routes
+app.use('/', require('./routes'));    // by default it fecthes routes/index.js
 app.listen(port, function(err, data)
 {
     if(err){
