@@ -21,3 +21,15 @@ module.exports.signIn  = function(req, res){
         title: "Codeial | Sign in"
     });
 }
+
+// get up Sign up data 
+module.exports.create = function(req, res)
+{
+
+}
+
+// Sign in and to create the session for the user
+module.exports.createSession = function(req, res)
+{
+
+}
