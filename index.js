@@ -44,6 +44,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticatedUser);
+
 // use express routes
 app.use('/', require('./routes'));    // by default it fecthes routes/index.js
 
