@@ -19,7 +19,7 @@ passport.use(new LocalStratergy({
                 console.log('Invalid UserName Password');
                 return done(null , false);
             }
-            return done(null , true);
+            return done(null , user);
         })
         .catch(err=>{
             console.log('Error in finding user--->Passport');
@@ -29,7 +29,7 @@ passport.use(new LocalStratergy({
 ));
 
 // serializing the user to decide which key is to be kept in cookies
-passport.serializeUser(function(user,done)
+passport.serializeUser((user,done) =>
 {
     done(null, user.id);
 });
@@ -37,12 +37,17 @@ passport.serializeUser(function(user,done)
 
 
 // deserializing the user from the key in the cookies
-passport.deserializeUser(function(id, done)
+passport.deserializeUser((id, done) =>
 {
     User.findById(id)
     .then(
         user =>{
-            return done(null, user);
+            if (!user) {
+                console.log('User not found');
+                return done(null, false);
+              }
+              return done(null, user);
+            // return done(null, user);
         }
     )
     .catch(err=>{
@@ -50,6 +55,7 @@ passport.deserializeUser(function(id, done)
         return done(err);
 
 });
+
 });
 
 module.exports = passport;
