@@ -13,13 +13,3 @@ module.exports.create = function(req, res)
     });
 }
 
-module.exports.posts = function(req, res)
-{
-    Post.findById(user_id)
-    .then(user => {
-        return res.end('<%=user.content %>')
-    }
-    ).catch();
-   
-
-}
