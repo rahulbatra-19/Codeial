@@ -1,0 +1,21 @@
+footer {
+  background-color: dimgray;
+  color: whitesmoke;
+  font-size: 1.4rem;
+  display: flex;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between !important;
+}
+
+footer ul li {
+  margin-right: 1rem;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: whitesmoke;
+}
