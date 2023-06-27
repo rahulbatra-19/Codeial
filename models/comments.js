@@ -5,10 +5,10 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // comment belongs to the user
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     post: {
         type: mongoose.Schema.Types.ObjectId,
