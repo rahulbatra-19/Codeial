@@ -14,6 +14,7 @@ module.exports.create = async function(req, res)
             })
                 post.comments.push(comment);
                 post.save();    // whenever updating save
+                req.flash('success', 'Comment published!');
                 res.redirect('/');
             
         }
@@ -33,15 +34,20 @@ module.exports.destroy = function(req, res)
                 comment.deleteOne();
 
                 Post.findByIdAndUpdate(postId , {$pull: {comments: req.params.id}}).then(()=>{
+                    req.flash('success', 'Comment deleted!');
                     return res.redirect('back');
                 }).catch(err =>{
-                    console.log(err);
+                    req.flash('error', err);
                     return res.redirect('back');
                 })
             }
             else{
+                req.flash('error', 'Unauthorized');
                 return res.redirect('back');
             }
         }
-    ).catch();
+    ).catch(err =>{
+        req.flash('error', err);
+        return res.redirect('back');
+    });
 }
