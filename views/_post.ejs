@@ -2,7 +2,7 @@
     <p>
         <% if (locals.user && (locals.user.id == post.user.id)) { %>
         <small>
-            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"> X</a>
+            <a class="delete-post-button delete-post" href="/posts/destroy/<%= post.id %>"> X</a>
         </small>
         <%}%>
         <%=post.content%>
@@ -13,7 +13,7 @@
     </p>
     <div class="post-comments">
         <% if(locals.user) { %>
-            <form action="/comments/create" method="post"> 
+            <form action="/comments/create" method="post" id="comments-form"> 
                 <input type="text" name="content" placeholder="Type here add comment...">
                 <input type="hidden" name="post" value="<%= post._id%>">
                 <input type="submit" value="Add Comment">

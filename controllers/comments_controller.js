@@ -7,13 +7,28 @@ module.exports.create = async function(req, res)
 
         if(post)
         {
-            let comment = Comment.create({
+            let comment = await Comment.create({
                 content : req.body.content,
                 post: req.body.post,
                 user: req.user._id
-            })
-                post.comments.push(comment);
-                post.save();    // whenever updating save
+            });
+
+            post.comments.push(comment);
+            post.save();    // whenever updating save
+                  // Populate the user field in the comment
+      comment = await comment.populate('user');
+
+            if (req.xhr) {
+                // If the request is AJAX, send JSON response
+                return res.status(200).json({
+                  data: {
+                    comment: comment,
+                  },
+                  message: 'Comment created',
+                });
+              }
+        
+               
                 req.flash('success', 'Comment published!');
                 res.redirect('/');
             
@@ -32,6 +47,18 @@ module.exports.destroy = function(req, res)
                 let postId = comment.post;
 
                 comment.deleteOne();
+
+
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data : {
+                        comment_id : req.params.id
+                    },
+                    message: "Comment deleted "
+                });
+            
+            }
 
                 Post.findByIdAndUpdate(postId , {$pull: {comments: req.params.id}}).then(()=>{
                     req.flash('success', 'Comment deleted!');
