@@ -28,15 +28,21 @@ module.exports.index = async function(req, res)
 module.exports.destroy =  async function(req, res)
 {
     try {
+
         let post =  await Post.findById(req.params.id);
 
-            let comment = await Comment.deleteMany({post: req.params.id});
+        if(post.user == req.user.id){
+            await Comment.deleteMany({post: req.params.id});
             post.deleteOne();
 
             return res.json(200, {
                 message: "Posts and associated comments deleted successfully!"
             });
-
+        }else{
+            return res.json(401, {
+                message: 'You cannot deletePost'
+            });
+        }
 
     }        catch (error) {
 
