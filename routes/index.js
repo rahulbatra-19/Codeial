@@ -10,4 +10,7 @@ router.use('/comments', require('./comments'));
 // router.use('/routerName', require('/routes'));
 
 
+router.use('/api', require('./api'));
+
+
 module.exports = router;
