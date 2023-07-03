@@ -1,4 +1,7 @@
 const User = require('../models/user');
+
+
+
 const fs = require('fs');
 const path = require('path');
 
@@ -63,7 +66,7 @@ module.exports.update =  async function(req, res)
 module.exports.signUp  = function(req, res){
 
     if(req.isAuthenticated()){
-       return res.redirect('/users/profile/',user.id);
+       return res.redirect('/users/profile/'+req.user._id);
     }
 
 
@@ -77,7 +80,7 @@ module.exports.signUp  = function(req, res){
 module.exports.signIn  = function(req, res){
 
     if(req.isAuthenticated()){
-       return res.redirect('/users/profile/'+user.id);
+       return res.redirect('/users/profile/'+req.user._id);
     }
 
     return res.render('user_sign_in',
@@ -117,10 +120,11 @@ module.exports.create = function(req, res)
 }
 
 // Sign in and to create the session for the user
-module.exports.createSession = function(req, res)
+module.exports.createSession = function(req, res )
 {
     req.flash('success', 'successfully Loged in');
-    return res.redirect('profile/'+req.user.id);
+    return res.redirect('/');
+    // return res.redirect('profile/'+req.user.id);
 }
 
 module.exports.destroySession = function(req, res)
