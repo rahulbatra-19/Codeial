@@ -7,27 +7,28 @@ module.exports.home =  async function(req, res)
 
     try {
         let posts = await Post.find({})
-    .populate('user')
-    .populate({
-        path: 'comments',
-        populate: {
-            path: 'user',
-            model: 'User'
+        .sort('-createdAt')
+        .populate('user')
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'user',
+            },
+            options: {
+                sort: '-createdAt' // Sort comments in descending order based on createdAt
+            }
+        });
+
+        let users =  await User.find();
+        return res.render('home',{
+            title: 'Codeial | Home',
+            posts : posts,
+            all_users : users
+        });   
+        } catch (error) {
+            console.log(error,"error");
         }
-    });
-
-    let users =  await User.find();
-    return res.render('home',{
-        title: 'Codeial | Home',
-        posts : posts,
-        all_users : users
-    });   
-    } catch (error) {
-        console.log(error,"error");
-    }
-    
-
-    
+      
 }
 
 
