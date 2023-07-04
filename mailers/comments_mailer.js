@@ -14,7 +14,7 @@ exports.newComment = (comment) =>{
         subject: "New comments published!",
         html: htmlString
     }).then(info =>{
-        console.log('Message Sent', info);
+        // console.log('Message Sent', info);
         return;
     }).catch(err=>{
         console.log('Error in sending mail',  err);
