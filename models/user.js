@@ -20,6 +20,16 @@ const userSchema = new mongoose.Schema({
     },
     avatar:{
         type: String
+    },
+    resetToken: {
+        token: {
+            type: String,
+            default: null
+        },
+        expiry: {
+            type: Date,
+            default: null
+        }
     }
 }, {
     timeStamp: true

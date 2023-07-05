@@ -20,7 +20,7 @@ let renderTemplate = (data, relativePath) =>{
         data,
         function(err, template)
         {
-            if(err){console.log('error in rendering error' , err); return;}
+            if(err){console.log('error in rendering error'); return;}
             mailHtml = template;
 
         }

@@ -15,6 +15,7 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 
 const MongoStore = require('connect-mongo');
+
 const sassMiddleware = require('node-sass-middleware');
 // for flash messsages
 const flash  = require('connect-flash');
@@ -81,8 +82,6 @@ app.use(customMware.setFlash);
 
 
 
-app.use(flash());
-app.use(customMware.setFlash);
 // use express routes
 app.use('/', require('./routes'));    // by default it fecthes routes/index.js
 
