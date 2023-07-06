@@ -9,10 +9,14 @@ module.exports.home =  async function(req, res)
         let posts = await Post.find({})
         .sort('-createdAt')
         .populate('user')
+        .populate('likes')
         .populate({
             path: 'comments',
             populate: {
                 path: 'user',
+            },
+            populate: {
+                path : 'likes'
             },
             options: {
                 sort: '-createdAt' // Sort comments in descending order based on createdAt

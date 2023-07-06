@@ -15,10 +15,15 @@
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul ').prepend(newPost);
                     deletePost($(' .delete-post-button', newPost));
+
+                    handleCommentSubmission(newPost);
+
+                    // enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+
                     showNotification('success' , data.message);
 
 
-                    handleCommentSubmission(newPost);
 
                     newPostForm.trigger('reset');
 
@@ -46,6 +51,12 @@
                             <br>
                             <small>
                                 ${ post.user.name}
+                            </small>
+                            <br>
+                            <small>
+                                <a class = "toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                                0 Likes
+                                </a>
                             </small>
                         </p>
                         <div class="post-comments">
@@ -106,6 +117,11 @@
                     let newComment = newCommentDom(data.data.comment);
                     $(`#post-comments-${data.data.comment.post}`).prepend(newComment);
                     deleteComment($(' .delete-comment-button', newComment));
+
+                    // enable the functionality of the toggle like button on the new comment
+                    new ToggleLike($(' .toggle-like-button', newComment));
+
+                    
                     showNotification('success' , data.message);
 
                     commentForm.trigger('reset');
@@ -128,6 +144,12 @@
                         <br>
                         <small>
                             ${comment.user.name}
+                        </small>
+                        <br>
+                        <small>
+                                <a class = "toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                                0 Likes
+                                </a>
                         </small>
                     </p>
                 </li>`);
