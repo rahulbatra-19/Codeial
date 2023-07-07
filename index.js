@@ -21,7 +21,18 @@ const sassMiddleware = require('node-sass-middleware');
 const flash  = require('connect-flash');
 const customMware = require('./config/middleware');
 
+// // setup the chat server to be usd with socket.io
+// const corsOptions = {
+//     origin: 'http://localhost:8000',
+//     optionsSuccessStatus: 200
+//   };
 
+// const cors = require('cors');
+// app.use(cors(corsOptions));
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(4000);
+console.log('chat server is listening on port 4000');
 
 app.use(sassMiddleware({
     src: './assets/scss',
