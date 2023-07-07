@@ -30,7 +30,13 @@ const userSchema = new mongoose.Schema({
             type: Date,
             default: null
         }
-    }
+    },
+    friendships :[
+        {
+        type:  mongoose.Schema.Types.ObjectId,
+        refPath: 'Friendship'
+        }
+    ]
 }, {
     timeStamp: true
 });

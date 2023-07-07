@@ -1,5 +1,6 @@
 const Post = require('../models/posts');
 const User = require('../models/user');
+const Friendships = require('../models/friendship');
 module.exports.home =  async function(req, res)
 {
     // console.log(req.cookies);
@@ -23,11 +24,26 @@ module.exports.home =  async function(req, res)
             }
         });
 
-        let users =  await User.find();
+        let users =  await User.find().populate('friendships', 'to_user');
+        let Friendship =[];
+        if(req.user){
+        for( friend of  req.user.friendships){
+            let friends = await Friendships.findById(friend._id);
+            let touser = await User.findById(friends.to_user);
+            let fromuser = await User.findById(friends.from_user);
+            if(touser.id == req.user.id){
+                Friendship.push(fromuser);
+            }else{
+                Friendship.push(touser);
+            }
+            }
+        }
+
         return res.render('home',{
             title: 'Codeial | Home',
             posts : posts,
-            all_users : users
+            all_users : users,
+            friendships : Friendship
         });   
         } catch (error) {
             console.log(error,"error");

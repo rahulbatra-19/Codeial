@@ -1,20 +1,32 @@
 const User = require('../models/user');
+const Friendship = require('../models/friendship'); 
 const forgotPass = require('../mailers/forgot_pass_mailer');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
 
-module.exports.profile = function(req, res){
+module.exports.profile = async function(req, res){
     // res.end('<h1> User Profile </h1>');
 
-    User.findById(req.params.id).then(user =>{
+        let user= await User.findById(req.params.id).populate('friendships');
+        let isFriend = false;
+        let existingFriend = await Friendship.findOne({
+            $or:[
+                { from_user: req.user._id , to_user : user.id },
+                { from_user: user.id , to_user : req.user._id }
+            ]
+        });
+        if(existingFriend)
+        {
+            isFriend = true;
+        }
         return res.render('user_profile',
         {
             title: 'User',
-            profile_user: user
+            profile_user: user,
+            isFriend : isFriend
         });
-    });
    
 }
 

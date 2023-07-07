@@ -11,7 +11,7 @@ class ToggleLike{
             e.preventDefault();
             let self = this;
 
-
+            console.log(self);
 
             // this is a new way of writing ajax which you might've studied, it looks like the same as promises
             $.ajax({

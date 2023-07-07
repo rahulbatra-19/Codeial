@@ -3,12 +3,21 @@
 
     #feed-posts{
         width: 70%;
+        margin: auto;
         padding: 10px;
     }
-    #user-friends{
-        width: 30%;
-        padding: 10px;
+    .right{
+        height: fit-content;
         border-left: 1px solid lightgray;
-        height: 100vh;
+        padding: 10px;
+        width: 30%;
+
+        #user-friends{
+            border-bottom: 1px solid lightgray;
+        }
+        #user-all{
+            
+        }    
     }
+    
 }

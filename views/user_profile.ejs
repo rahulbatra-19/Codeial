@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 
-<img src="<%=user.avatar%>" alt="<%=user.name%>" width="100px">
+<img src="<%=profile_user.avatar%>" alt="<%=profile_user.name%>" width="100px">
 
     <% if (user.id == profile_user.id) {%>
         <!--  if user matches than show thoi form -->
@@ -15,5 +15,26 @@
         <%} else {%> 
     <p><%= profile_user.name%></p>
     <p><%= profile_user.email%></p>
-
+    <p>
+        <a href="/friends/toggle/?id=<%=profile_user._id%>" class="toggle-friendship-button" data-value="Add friend" >
+            <% if (isFriend) { %>
+                Remove friend
+            <%}else {%>
+                Add Friend
+            <%}%>
+        </a>
+    </p>
     <%}%>
+
+
+    <script src="/js/toggle_friendship.js"></script>
+    <script>
+        $('.toggle-friendship-button').each( function(){
+            let self = this;
+            console.log(self);
+            let friendship = new Friends(self);
+        });
+    </script>
+
+    
+   

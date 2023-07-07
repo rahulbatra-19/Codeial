@@ -19,15 +19,26 @@
         </div>
 
     </section>
-
+    <div class="right">
+        <% if(locals.user) {%>
     <section id="user-friends">
         <h4>Friends </h4>
+        <% for(friend of friendships) {%>
+            <p>
+                <a href="/users/profile/<%= friend._id %>"><%=friend.name%></a>
+            </p>
+            <%}%>
+    </section>
+    <%}%>
+    <section id="users-all">
+        <h4>Users</h4>
         <% for(u of all_users) {%>
             <p>
                 <a href="/users/profile/<%= u.id %>"><%=u.name%></a>
             </p>
             <%}%>
     </section>
+</div>
 </div>
 
 <script src="/js/home_posts.js"></script>
@@ -37,6 +48,7 @@
 <script>
     $('.toggle-like-button').each(function(){
         let self = this;
+        // console.log(this);
         let toggleLike = new ToggleLike(self);
     });
 </script>

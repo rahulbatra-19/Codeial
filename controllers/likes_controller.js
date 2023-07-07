@@ -19,7 +19,7 @@ module.exports.toggleLike = async function(req, res)
             likeable : req.query.id,
             onModel: req.query.type,
             user: req.user._id
-        })
+        });
         //  if a like already exists then delete it
         if(existingLike){
             likeable.likes.pull(existingLike._id);
