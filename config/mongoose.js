@@ -1,12 +1,14 @@
 // require the library
 const mongoose = require('mongoose');
+const env = require('./environment');
 // Error handling
+
 main().catch(err => console.log('Error connecting to db', err));
 
 // connect to database 
 async function main()
 {
-    await mongoose.connect('mongodb://localhost/codeial_development');
+    await mongoose.connect(`mongodb://localhost/${env.db}`);
 }
 
 // acquire the connection (to check if it is successfull)

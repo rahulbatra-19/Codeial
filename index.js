@@ -1,4 +1,5 @@
 const express = require('express');
+const env = require('./config/environment');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
@@ -22,31 +23,30 @@ const flash  = require('connect-flash');
 const customMware = require('./config/middleware');
 
 // // setup the chat server to be usd with socket.io
-// const corsOptions = {
-//     origin: 'http://localhost:8000',
-//     optionsSuccessStatus: 200
-//   };
 
-// const cors = require('cors');
-// app.use(cors(corsOptions));
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(4000);
 console.log('chat server is listening on port 4000');
 
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug:true,
-    outputStyle: 'expanded',
-    prefix: '/css'
-}));
+const path = require('path');
+
+
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path , 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug:true,
+        outputStyle: 'expanded',
+        prefix: '/css'
+    }));
+}
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 
 app.use(expressLayouts);
 
@@ -67,7 +67,7 @@ app.set('views','./views');
 app.use(session({
     name: 'codeial',
     // todo hange the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
