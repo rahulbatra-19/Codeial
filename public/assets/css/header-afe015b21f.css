@@ -1,0 +1,26 @@
+header {
+  background-color: #0080ff;
+  color: whitesmoke;
+  display: flex;
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0;
+  margin-top: 10px;
+}
+
+header ul {
+  font-size: 1.3rem;
+  width: 20%;
+  margin-left: 70%;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+header ul li a {
+  text-decoration: none;
+  color: whitesmoke;
+}
