@@ -29,7 +29,9 @@ class ToggleLike{
 
 
                 $(self).attr('data-likes', likesCount);
-                $(self).html(`${likesCount} Likes`);
+                $(self).html(`${likesCount} <span class="material-symbols-outlined">
+                thumb_up
+                </span>`);
 
             })
             .fail(function(errData) {

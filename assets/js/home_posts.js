@@ -55,7 +55,9 @@
                             <br>
                             <small>
                                 <a class = "toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                                0 Likes
+                                0 <span class="material-symbols-outlined">
+                                thumb_up
+                                </span>
                                 </a>
                             </small>
                         </p>
@@ -148,7 +150,9 @@
                         <br>
                         <small>
                                 <a class = "toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                                0 Likes
+                                0 <span class="material-symbols-outlined">
+                                thumb_up
+                                </span>
                                 </a>
                         </small>
                     </p>

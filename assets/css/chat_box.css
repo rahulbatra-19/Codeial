@@ -1,7 +1,23 @@
+#chat-box-open {
+  position: fixed;
+  bottom: 2px;
+  right: 10px;
+  border: 1px solid blue;
+  background-color: #a0dcff;
+  color: white;
+  width: 300px;
+  padding: 10px;
+}
+
+#chat-box-open a {
+  text-decoration: none;
+}
+
 #user-chat-box {
+  display: none;
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  right: 2px;
   border: 1px dashed grey;
   height: 350px;
   width: 300px;

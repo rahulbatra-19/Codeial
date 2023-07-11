@@ -56,6 +56,10 @@
 <script src="<%= assetPath('/js/chat_engine.js') %>"></script>
 <% if (locals.user){ %>
 <script>
+    $('#chat-box-open').click(function(event){
+        $('#chat-box-open').css('display', 'none');
+        $('#user-chat-box').css('display', 'inline-block');
+    });
     new ChatEngine('user-chat-box', '<%= locals.user.name %>')
 </script>
 <% } %>
